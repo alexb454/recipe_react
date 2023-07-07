@@ -1,0 +1,16 @@
+.first {
+    font-size: 75px;
+}
+
+.button {
+    font-size: 40px;
+    color: red;
+}
+
+
+.random_button {
+    color: black;
+    background-color: pink;
+    border-radius: 30%;
+    font-size: 75px;
+}

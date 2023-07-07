@@ -1,0 +1,20 @@
+.top {
+    background-color: blue;
+    color: white;
+}
+
+.options {
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: -25px;
+    margin-left: 30rem
+}
+
+.hambutton { 
+    font-size: 25px;
+    color: red;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-left: 42rem
+}
