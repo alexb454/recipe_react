@@ -1,12 +1,14 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const AllRecipes = () => {
     const [info, setInfo] = useState([]);
+    // const [thisPage, setThisPage] = usestate(1);
+    // const [itemsForOnePage] = useState(8);
 
     useEffect(() => {
-        fetch('')
-        .then(response => response.json())
+        fetch('/index.js')
+        .then(res => res.json())
         .then(all => setInfo(all))
         .catch(error => console.log(error));
     })
