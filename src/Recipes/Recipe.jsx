@@ -1,17 +1,25 @@
-//import React from 'react';
+import { useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
 
-function Display() {
+const AllRecipes = () => {
+    const [info, setInfo] = useState([]);
 
+    useEffect(() => {
+        fetch('')
+        .then(response => response.json())
+        .then(all => setInfo(all))
+        .catch(error => console.log(error));
+    })
     return(
         <Card className='recipe_card'>
-            <Card.Img className='image'></Card.Img>
+            <Card.Img className='image'>{info.image}</Card.Img>
             <Card.Body>
-                <Card.Title className='title'></Card.Title>
-                <Card.Text className='times'></Card.Text>
+                <Card.Title className='title'>{info.title}</Card.Title>
+                <Card.Text className='times'>{info.times}</Card.Text>
             </Card.Body>
         </Card>
     )
 }
 
-export default Display;
+
+export default AllRecipes;
