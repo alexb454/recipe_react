@@ -25,7 +25,7 @@ if (!recipe) {
 return (
     <div className="searched_recipe">
         <Link to='/'>
-        <button>Return to homepage</button>
+        <button className='homepage'>Return to homepage</button>
         </Link>
     <div className='id_container'>
         <Card className="id_card" key={recipe.id}>
