@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import './Home.css';
 import {CgPlayButtonR} from 'react-icons/cg';
 import {useLocation, Link} from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 const Home = () => {
     const [recipes, setRecipes] = useState([]);
@@ -10,6 +11,12 @@ const Home = () => {
     const location = useLocation();
     const searchById = new URLSearchParams(location.search).get('id');
     const [randomId, setRandomId ] = useState('')
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const recipesPerPage = 12;
+    const pageCount = Math.ceil(recipes.length / recipesPerPage);
+    const offset = currentPage * recipesPerPage;
+    const currentRecipes = recipes.slice(offset, offset + recipesPerPage);
 
     useEffect(() => {
         fetch('http://localhost:3000/all_recipes')
@@ -40,6 +47,10 @@ const Home = () => {
         .catch(error => console.log(error));
     }
 
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
 return (
     <div className='home'>
         <h1 className='first'>Welcome to the Lovely Recipe Site!</h1>
@@ -57,7 +68,7 @@ return (
         <CgPlayButtonR className="random_button" onClick={handleRandom}/>
         </Link>
         <div className='recipe_container'>
-        {recipes.map(recipe => (
+        {currentRecipes.map(recipe => (
         <Card className='recipe_card' key={recipe.id}>
             <Card.Img className='image' src={recipe.image} alt={recipe.title} />
             <Card.Body>
@@ -67,6 +78,26 @@ return (
             </Card>
         ))}
         </div>
+        <ReactPaginate
+        previousLabel={'Previous'}
+        nextLabel={'Next'}
+        breakLabel={'...'}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        pageClassName={'pagination-item'}
+        previousClassName={'pagination-item'}
+        nextClassName={'pagination-item'}
+        activeClassName={'active'}
+        disabledClassName={'disabled'}
+        previousLinkClassName={'pagination-link'}
+        nextLinkClassName={'pagination-link'}
+        pageLinkClassName={'pagination-link'}
+        breakLinkClassName={'pagination-link'}
+        activeLinkClassName={'active-link'}
+        />
         </div>
     );
 };
