@@ -9,6 +9,7 @@ const Home = () => {
     const [searchId, setSearchId] = useState('');
     const location = useLocation();
     const searchById = new URLSearchParams(location.search).get('id');
+    const [randomId, setRandomId ] = useState('')
 
     useEffect(() => {
         fetch('http://localhost:3000/all_recipes')
@@ -25,11 +26,18 @@ const Home = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(searchById);
-            console.log(searchId);
-            console.log('Searched id results:', data);
+            // console.log(searchId);
+            // console.log('Searched id results:', data);
             setRecipes([data]);
         })
         .catch((error) => console.log(error));
+    }
+
+    const handleRandom = () => {
+        fetch('http://localhost:3000/random_recipe')
+        .then(res => res.json())
+        .then(data => setRandomId(data.id))
+        .catch(error => console.log(error));
     }
 
 return (
@@ -45,7 +53,9 @@ return (
         <button className='search_button' onClick={handleSearch}>Search</button>
         </Link>
         <button className='sort'>Sort by</button>
-        <CgPlayButtonR className="random_button"/>
+        <Link to={`/random?id=${randomId}`}>
+        <CgPlayButtonR className="random_button" onClick={handleRandom}/>
+        </Link>
         <div className='recipe_container'>
         {recipes.map(recipe => (
         <Card className='recipe_card' key={recipe.id}>
