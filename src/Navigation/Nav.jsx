@@ -1,4 +1,3 @@
-//import React from 'react';
 import './Nav.css';
 import {GiHamburgerMenu} from 'react-icons/gi'
 
